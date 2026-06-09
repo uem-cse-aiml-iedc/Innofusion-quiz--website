@@ -37,17 +37,25 @@ type AdminQuestion = {
 function Admin() {
   const { state, startQuiz, endQuiz, resetQuiz, nextQuestion, socket } = useQuiz();
   const [questions, setQuestions] = useState<AdminQuestion[]>([]);
+  // Auth lives ONLY in React state — never persisted to sessionStorage / localStorage / cookies.
+  // Every page visit or refresh requires a fresh login.
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [secretCode, setSecretCode] = useState("");
+  const [adminId, setAdminId] = useState("");
+  const [adminPassword, setAdminPassword] = useState("");
   const [error, setError] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+
+  const ADMIN_ID = "innofusion";
+  const ADMIN_PASSWORD = "#_Asif01_#_Pratyay02_#_Dipti03_#_Innofusion3_#";
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
-    if (secretCode === "#_Asif01_#_Pratyay02_#_Dipti03_#_Innofusion3_#") {
+    if (adminId === ADMIN_ID && adminPassword === ADMIN_PASSWORD) {
       setIsAuthenticated(true);
       setError("");
     } else {
-      setError("Incorrect Admin Secret Code!");
+      setError("Invalid ID or password. Please try again.");
+      setAdminPassword(""); // clear password on failure for security
     }
   };
 
@@ -76,30 +84,81 @@ function Admin() {
 
   if (!isAuthenticated) {
     return (
-      <div className="px-4 py-10 sm:py-16">
+      <div className="px-4 py-10 sm:py-16 min-h-screen flex items-center justify-center">
         <motion.div
           initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
-          className="mx-auto max-w-md wood-panel p-8"
+          className="mx-auto w-full max-w-md wood-panel p-8"
         >
-          <div className="text-center mb-6">
+          <div className="text-center mb-8">
             <div className="mx-auto inline-flex rounded-xl gold-panel p-3 mb-3">
-              <Shield className="h-7 w-7" />
+              <Shield className="h-8 w-8" />
             </div>
             <h1 className="font-display text-3xl font-black text-gold">Admin Login</h1>
-            <p className="mt-2 text-sm text-muted-foreground">Enter the secret code to access the war room.</p>
+            <p className="mt-2 text-sm text-muted-foreground">
+              Enter your credentials to access the war room.
+            </p>
           </div>
 
-          <form onSubmit={handleLogin} className="space-y-5">
+          <form onSubmit={handleLogin} className="space-y-5" autoComplete="off">
+            {/* ID field */}
             <div>
-              <label className="block mb-2 text-xs font-bold uppercase tracking-widest text-gold">Secret Code</label>
+              <label className="block mb-2 text-xs font-bold uppercase tracking-widest text-gold">
+                Admin ID
+              </label>
               <input
-                type="password" value={secretCode} onChange={e => setSecretCode(e.target.value)}
-                placeholder="Enter secret code"
-                className="w-full rounded-lg border-2 border-border bg-input/50 px-4 py-3 text-foreground placeholder:text-muted-foreground focus:border-gold focus:outline-none"
+                type="text"
+                value={adminId}
+                onChange={e => setAdminId(e.target.value)}
+                placeholder="Enter admin ID"
+                autoComplete="off"
+                autoCorrect="off"
+                autoCapitalize="off"
+                spellCheck={false}
+                required
+                className="w-full rounded-lg border-2 border-border bg-input/50 px-4 py-3 text-foreground placeholder:text-muted-foreground focus:border-gold focus:outline-none transition-colors"
               />
-              {error && <p className="mt-1 text-xs text-destructive">{error}</p>}
             </div>
-            <button type="submit" className="btn-medieval w-full text-lg">
+
+            {/* Password field */}
+            <div>
+              <label className="block mb-2 text-xs font-bold uppercase tracking-widest text-gold">
+                Password
+              </label>
+              <div className="relative">
+                <input
+                  type={showPassword ? "text" : "password"}
+                  value={adminPassword}
+                  onChange={e => setAdminPassword(e.target.value)}
+                  placeholder="Enter password"
+                  autoComplete="new-password"
+                  required
+                  className="w-full rounded-lg border-2 border-border bg-input/50 px-4 py-3 pr-12 text-foreground placeholder:text-muted-foreground focus:border-gold focus:outline-none transition-colors"
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(v => !v)}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-gold transition-colors text-xs font-bold uppercase tracking-wider"
+                  tabIndex={-1}
+                >
+                  {showPassword ? "Hide" : "Show"}
+                </button>
+              </div>
+            </div>
+
+            {error && (
+              <motion.p
+                initial={{ opacity: 0, y: -4 }} animate={{ opacity: 1, y: 0 }}
+                className="text-xs text-destructive font-semibold"
+              >
+                ⚠️ {error}
+              </motion.p>
+            )}
+
+            <button
+              type="submit"
+              className="btn-medieval w-full text-lg"
+              disabled={!adminId || !adminPassword}
+            >
               <Shield className="h-5 w-5" /> Access Dashboard
             </button>
           </form>
