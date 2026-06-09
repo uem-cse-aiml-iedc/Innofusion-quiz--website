@@ -1,16 +1,16 @@
 import { Link } from "@tanstack/react-router";
-import { Swords } from "lucide-react";
+
 
 export function Navbar() {
   return (
     <header className="relative z-20 px-4 py-4 sm:px-8">
       <div className="mx-auto flex max-w-7xl items-center justify-between">
         <Link to="/" className="flex items-center gap-3 group">
-          <div className="rounded-lg gold-panel p-2">
-            <Swords className="h-6 w-6" />
+          <div className="rounded-lg overflow-hidden">
+            <img src="/innofusion.png" alt="InnoFusion Logo" className="h-10 w-10 object-contain" />
           </div>
           <div>
-            <div className="font-display text-xl sm:text-2xl font-black text-gold leading-none">Startup Clash</div>
+            <div className="font-display text-xl sm:text-2xl font-black text-gold leading-none">InnoFusion3.0</div>
             <div className="text-[10px] sm:text-xs text-muted-foreground uppercase tracking-widest">Battle Quiz Arena</div>
           </div>
         </Link>
