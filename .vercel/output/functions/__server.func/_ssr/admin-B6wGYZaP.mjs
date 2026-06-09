@@ -1,11 +1,11 @@
 import { r as reactExports, j as jsxRuntimeExports } from "../_libs/react.mjs";
 import { L as Link } from "../_libs/tanstack__react-router.mjs";
-import { u as useQuiz } from "./router-CCCeGJ67.mjs";
+import { u as useQuiz } from "./router-BTAvFi0D.mjs";
 import { L as Leaderboard } from "./Leaderboard-JLJa3kNm.mjs";
 import { t as toast } from "../_libs/sonner.mjs";
 import "../_libs/socket.io-client.mjs";
 import { m as motion } from "../_libs/framer-motion.mjs";
-import { U as Users, T as Trophy, L as ListChecks, P as Play, b as SkipForward, c as Square, R as RotateCcw } from "../_libs/lucide-react.mjs";
+import { b as Shield, U as Users, T as Trophy, L as ListChecks, P as Play, c as SkipForward, d as Square, R as RotateCcw } from "../_libs/lucide-react.mjs";
 import "../_libs/tanstack__router-core.mjs";
 import "../_libs/tanstack__history.mjs";
 import "../_libs/cookie-es.mjs";
@@ -69,6 +69,18 @@ function Admin() {
     socket
   } = useQuiz();
   const [questions, setQuestions] = reactExports.useState([]);
+  const [isAuthenticated, setIsAuthenticated] = reactExports.useState(false);
+  const [secretCode, setSecretCode] = reactExports.useState("");
+  const [error, setError] = reactExports.useState("");
+  const handleLogin = (e) => {
+    e.preventDefault();
+    if (secretCode === "#_Asif01_#_Pratyay02_#_Dipti03_#_Innofusion3_#") {
+      setIsAuthenticated(true);
+      setError("");
+    } else {
+      setError("Incorrect Admin Secret Code!");
+    }
+  };
   reactExports.useEffect(() => {
     if (socket) {
       socket.emit("admin_join");
@@ -82,12 +94,38 @@ function Admin() {
         if (data.success && data.questions) {
           setQuestions(data.questions);
         }
-      } catch (error) {
-        console.error("Failed to fetch admin data:", error);
+      } catch (error2) {
+        console.error("Failed to fetch admin data:", error2);
       }
     };
     fetchAdminData();
   }, []);
+  if (!isAuthenticated) {
+    return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "px-4 py-10 sm:py-16", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(motion.div, { initial: {
+      opacity: 0,
+      y: 20
+    }, animate: {
+      opacity: 1,
+      y: 0
+    }, className: "mx-auto max-w-md wood-panel p-8", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "text-center mb-6", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mx-auto inline-flex rounded-xl gold-panel p-3 mb-3", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Shield, { className: "h-7 w-7" }) }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { className: "font-display text-3xl font-black text-gold", children: "Admin Login" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-2 text-sm text-muted-foreground", children: "Enter the secret code to access the war room." })
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("form", { onSubmit: handleLogin, className: "space-y-5", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("label", { className: "block mb-2 text-xs font-bold uppercase tracking-widest text-gold", children: "Secret Code" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("input", { type: "password", value: secretCode, onChange: (e) => setSecretCode(e.target.value), placeholder: "Enter secret code", className: "w-full rounded-lg border-2 border-border bg-input/50 px-4 py-3 text-foreground placeholder:text-muted-foreground focus:border-gold focus:outline-none" }),
+          error && /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-1 text-xs text-destructive", children: error })
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("button", { type: "submit", className: "btn-medieval w-full text-lg", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx(Shield, { className: "h-5 w-5" }),
+          " Access Dashboard"
+        ] })
+      ] })
+    ] }) });
+  }
   return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "px-4 py-8", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mx-auto max-w-7xl space-y-6", children: [
     /* @__PURE__ */ jsxRuntimeExports.jsxs(motion.div, { initial: {
       opacity: 0,

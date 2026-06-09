@@ -2,7 +2,7 @@ import { r as reactExports, j as jsxRuntimeExports } from "../_libs/react.mjs";
 import { L as Link } from "../_libs/tanstack__react-router.mjs";
 import { c as confetti } from "../_libs/canvas-confetti.mjs";
 import { L as Leaderboard } from "./Leaderboard-JLJa3kNm.mjs";
-import { u as useQuiz } from "./router-CCCeGJ67.mjs";
+import { u as useQuiz } from "./router-BTAvFi0D.mjs";
 import "../_libs/socket.io-client.mjs";
 import "../_libs/sonner.mjs";
 import { m as motion } from "../_libs/framer-motion.mjs";

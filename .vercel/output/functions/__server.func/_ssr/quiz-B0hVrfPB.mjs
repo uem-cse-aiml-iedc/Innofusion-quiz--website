@@ -1,6 +1,6 @@
 import { r as reactExports, j as jsxRuntimeExports } from "../_libs/react.mjs";
 import { d as useNavigate } from "../_libs/tanstack__react-router.mjs";
-import { u as useQuiz, c as calculatePoints } from "./router-CCCeGJ67.mjs";
+import { u as useQuiz, c as calculatePoints } from "./router-BTAvFi0D.mjs";
 import "../_libs/socket.io-client.mjs";
 import "../_libs/sonner.mjs";
 import { m as motion, A as AnimatePresence } from "../_libs/framer-motion.mjs";

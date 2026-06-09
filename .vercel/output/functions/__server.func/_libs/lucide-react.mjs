@@ -219,8 +219,8 @@ export {
   Users as U,
   X,
   Check as a,
-  SkipForward as b,
-  Square as c,
-  Shield as d,
+  Shield as b,
+  SkipForward as c,
+  Square as d,
   Timer as e
 };

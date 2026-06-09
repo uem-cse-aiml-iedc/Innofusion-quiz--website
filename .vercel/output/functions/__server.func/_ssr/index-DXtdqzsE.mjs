@@ -1,7 +1,7 @@
 import { j as jsxRuntimeExports } from "../_libs/react.mjs";
 import { L as Link } from "../_libs/tanstack__react-router.mjs";
 import { m as motion } from "../_libs/framer-motion.mjs";
-import { C as Crown, S as Swords, d as Shield, T as Trophy, e as Timer, U as Users } from "../_libs/lucide-react.mjs";
+import { C as Crown, S as Swords, b as Shield, T as Trophy, e as Timer, U as Users } from "../_libs/lucide-react.mjs";
 import "../_libs/tanstack__router-core.mjs";
 import "../_libs/tanstack__history.mjs";
 import "../_libs/cookie-es.mjs";
@@ -80,7 +80,15 @@ function Landing() {
           /* @__PURE__ */ jsxRuntimeExports.jsx(Swords, { className: "h-5 w-5" }),
           " Join Quiz"
         ] }),
-        /* @__PURE__ */ jsxRuntimeExports.jsxs(Link, { to: "/admin", className: "btn-stone text-lg w-full sm:w-auto", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs(Link, { to: "/admin", onClick: (e) => {
+          const code = prompt("Enter Admin Secret Code:");
+          if (code === "#_Asif01_#_Pratyay02_#_Dipti03_#_Innofusion3_#") {
+            sessionStorage.setItem("adminAuth", "true");
+          } else {
+            e.preventDefault();
+            alert("Incorrect Admin Secret Code!");
+          }
+        }, className: "btn-stone text-lg w-full sm:w-auto", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx(Shield, { className: "h-5 w-5" }),
           " Admin Login"
         ] })

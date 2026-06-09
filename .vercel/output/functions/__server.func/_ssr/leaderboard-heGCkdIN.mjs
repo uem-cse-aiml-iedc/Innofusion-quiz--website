@@ -1,6 +1,6 @@
 import { j as jsxRuntimeExports } from "../_libs/react.mjs";
 import { L as Leaderboard } from "./Leaderboard-JLJa3kNm.mjs";
-import { u as useQuiz } from "./router-CCCeGJ67.mjs";
+import { u as useQuiz } from "./router-BTAvFi0D.mjs";
 import "../_libs/socket.io-client.mjs";
 import "../_libs/sonner.mjs";
 import { m as motion } from "../_libs/framer-motion.mjs";

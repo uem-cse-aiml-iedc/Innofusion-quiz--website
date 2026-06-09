@@ -435,7 +435,23 @@ function Navbar() {
     ] }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("nav", { className: "hidden sm:flex items-center gap-2", children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx(Link, { to: "/", className: "btn-stone text-sm", activeOptions: { exact: true }, children: "Home" }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx(Link, { to: "/admin", className: "btn-stone text-sm", children: "Admin" })
+      /* @__PURE__ */ jsxRuntimeExports.jsx(
+        Link,
+        {
+          to: "/admin",
+          onClick: (e) => {
+            const code = prompt("Enter Admin Secret Code:");
+            if (code === "#_Asif01_#_Pratyay02_#_Dipti03_#_Innofusion3_#") {
+              sessionStorage.setItem("adminAuth", "true");
+            } else {
+              e.preventDefault();
+              alert("Incorrect Admin Secret Code!");
+            }
+          },
+          className: "btn-stone text-sm",
+          children: "Admin"
+        }
+      )
     ] })
   ] }) });
 }
@@ -514,7 +530,7 @@ function RootComponent() {
     /* @__PURE__ */ jsxRuntimeExports.jsx(Toaster, { theme: "dark", position: "top-center", richColors: true })
   ] }) });
 }
-const $$splitComponentImporter$6 = () => import("./results-CIDfihDz.mjs");
+const $$splitComponentImporter$6 = () => import("./results-B93Tjdeo.mjs");
 const Route$6 = createFileRoute("/results")({
   head: () => ({
     meta: [{
@@ -523,7 +539,7 @@ const Route$6 = createFileRoute("/results")({
   }),
   component: lazyRouteComponent($$splitComponentImporter$6, "component")
 });
-const $$splitComponentImporter$5 = () => import("./quiz-BsDFsSKO.mjs");
+const $$splitComponentImporter$5 = () => import("./quiz-B0hVrfPB.mjs");
 const Route$5 = createFileRoute("/quiz")({
   head: () => ({
     meta: [{
@@ -532,7 +548,7 @@ const Route$5 = createFileRoute("/quiz")({
   }),
   component: lazyRouteComponent($$splitComponentImporter$5, "component")
 });
-const $$splitComponentImporter$4 = () => import("./lobby-BU0agFLy.mjs");
+const $$splitComponentImporter$4 = () => import("./lobby-D70BEkAs.mjs");
 const Route$4 = createFileRoute("/lobby")({
   head: () => ({
     meta: [{
@@ -541,7 +557,7 @@ const Route$4 = createFileRoute("/lobby")({
   }),
   component: lazyRouteComponent($$splitComponentImporter$4, "component")
 });
-const $$splitComponentImporter$3 = () => import("./leaderboard-BqAdJHc1.mjs");
+const $$splitComponentImporter$3 = () => import("./leaderboard-heGCkdIN.mjs");
 const Route$3 = createFileRoute("/leaderboard")({
   head: () => ({
     meta: [{
@@ -550,7 +566,7 @@ const Route$3 = createFileRoute("/leaderboard")({
   }),
   component: lazyRouteComponent($$splitComponentImporter$3, "component")
 });
-const $$splitComponentImporter$2 = () => import("./join-BlRy7EC5.mjs");
+const $$splitComponentImporter$2 = () => import("./join-C88Qaa_Z.mjs");
 const Route$2 = createFileRoute("/join")({
   head: () => ({
     meta: [{
@@ -559,7 +575,7 @@ const Route$2 = createFileRoute("/join")({
   }),
   component: lazyRouteComponent($$splitComponentImporter$2, "component")
 });
-const $$splitComponentImporter$1 = () => import("./admin-CM8IOEK4.mjs");
+const $$splitComponentImporter$1 = () => import("./admin-B6wGYZaP.mjs");
 const Route$1 = createFileRoute("/admin")({
   head: () => ({
     meta: [{
@@ -568,7 +584,7 @@ const Route$1 = createFileRoute("/admin")({
   }),
   component: lazyRouteComponent($$splitComponentImporter$1, "component")
 });
-const $$splitComponentImporter = () => import("./index-Dbmicz3D.mjs");
+const $$splitComponentImporter = () => import("./index-DXtdqzsE.mjs");
 const Route = createFileRoute("/")({
   head: () => ({
     meta: [{
