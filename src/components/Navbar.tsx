@@ -16,7 +16,21 @@ export function Navbar() {
         </Link>
         <nav className="hidden sm:flex items-center gap-2">
           <Link to="/" className="btn-stone text-sm" activeOptions={{ exact: true }}>Home</Link>
-          <Link to="/admin" className="btn-stone text-sm">Admin</Link>
+          <Link
+            to="/admin"
+            onClick={(e) => {
+              const code = prompt("Enter Admin Secret Code:");
+              if (code === "#_Asif01_#_Pratyay02_#_Dipti03_#_Innofusion3_#") {
+                sessionStorage.setItem("adminAuth", "true");
+              } else {
+                e.preventDefault();
+                alert("Incorrect Admin Secret Code!");
+              }
+            }}
+            className="btn-stone text-sm"
+          >
+            Admin
+          </Link>
         </nav>
       </div>
     </header>

@@ -37,13 +37,14 @@ type AdminQuestion = {
 function Admin() {
   const { state, startQuiz, endQuiz, resetQuiz, nextQuestion, socket } = useQuiz();
   const [questions, setQuestions] = useState<AdminQuestion[]>([]);
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(() => sessionStorage.getItem("adminAuth") === "true");
   const [secretCode, setSecretCode] = useState("");
   const [error, setError] = useState("");
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
     if (secretCode === "#_Asif01_#_Pratyay02_#_Dipti03_#_Innofusion3_#") {
+      sessionStorage.setItem("adminAuth", "true");
       setIsAuthenticated(true);
       setError("");
     } else {

@@ -56,7 +56,19 @@ function Landing() {
           <Link to="/join" className="btn-medieval text-lg w-full sm:w-auto">
             <Swords className="h-5 w-5" /> Join Quiz
           </Link>
-          <Link to="/admin" className="btn-stone text-lg w-full sm:w-auto">
+          <Link
+            to="/admin"
+            onClick={(e) => {
+              const code = prompt("Enter Admin Secret Code:");
+              if (code === "#_Asif01_#_Pratyay02_#_Dipti03_#_Innofusion3_#") {
+                sessionStorage.setItem("adminAuth", "true");
+              } else {
+                e.preventDefault();
+                alert("Incorrect Admin Secret Code!");
+              }
+            }}
+            className="btn-stone text-lg w-full sm:w-auto"
+          >
             <Shield className="h-5 w-5" /> Admin Login
           </Link>
         </motion.div>
