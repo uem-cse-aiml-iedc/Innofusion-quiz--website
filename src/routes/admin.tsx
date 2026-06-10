@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
-import { ListChecks, Play, RotateCcw, SkipForward, Square, Trophy, Users, Shield } from "lucide-react";
+import { Download, ListChecks, Play, RotateCcw, SkipForward, Square, Trophy, Users, Shield } from "lucide-react";
 import { useQuiz } from "@/store/quiz-store";
 import { Leaderboard } from "@/components/Leaderboard";
 import { toast } from "sonner";
@@ -37,6 +37,17 @@ type AdminQuestion = {
 function Admin() {
   const { state, startQuiz, endQuiz, resetQuiz, nextQuestion, socket } = useQuiz();
   const [questions, setQuestions] = useState<AdminQuestion[]>([]);
+
+  const downloadResults = () => {
+    const sorted = [...state.participants].sort((a, b) => b.score - a.score || a.responseTime - b.responseTime);
+    const lines = ["Rank,Name,Phone,Score,Avg Response Time (s)"];
+    sorted.forEach((p, i) => lines.push(`${i + 1},${p.name},${p.phone},${p.score},${p.responseTime}`));
+    const blob = new Blob([lines.join("\n")], { type: "text/csv" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url; a.download = "startup-clash-results.csv"; a.click();
+    URL.revokeObjectURL(url);
+  };
   // Auth lives ONLY in React state — never persisted to sessionStorage / localStorage / cookies.
   // Every page visit or refresh requires a fresh login.
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -230,6 +241,11 @@ function Admin() {
             <Link to="/quiz" className="btn-stone">
               <ListChecks className="h-5 w-5" /> View Quiz Screen
             </Link>
+            {state.status === "finished" && (
+              <button onClick={downloadResults} className="btn-medieval">
+                <Download className="h-5 w-5" /> Download Results
+              </button>
+            )}
           </div>
         </div>
 

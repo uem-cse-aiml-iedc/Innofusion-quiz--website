@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
-import { Crown, Download, Home, Medal, Trophy } from "lucide-react";
+import { Crown, Home, Medal, Trophy } from "lucide-react";
 import { useEffect } from "react";
 import confetti from "canvas-confetti";
 import { Leaderboard } from "@/components/Leaderboard";
@@ -23,15 +23,6 @@ function Results() {
     return () => clearInterval(id);
   }, []);
 
-  const downloadResults = () => {
-    const lines = ["Rank,Name,Phone,Score,Avg Response Time (s)"];
-    sorted.forEach((p, i) => lines.push(`${i + 1},${p.name},${p.phone},${p.score},${p.responseTime}`));
-    const blob = new Blob([lines.join("\n")], { type: "text/csv" });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url; a.download = "startup-clash-results.csv"; a.click();
-    URL.revokeObjectURL(url);
-  };
 
   const podiumOrder = [top3[1], top3[0], top3[2]].filter(Boolean);
   const heights = ["h-32", "h-44", "h-24"];
@@ -75,9 +66,6 @@ function Results() {
         <Leaderboard participants={state.participants} />
 
         <div className="flex flex-col sm:flex-row justify-center gap-3">
-          <button onClick={downloadResults} className="btn-medieval">
-            <Download className="h-5 w-5" /> Download Results
-          </button>
           <Link to="/" className="btn-stone" onClick={() => resetQuiz()}>
             <Home className="h-5 w-5" /> Return Home
           </Link>

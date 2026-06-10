@@ -49,7 +49,6 @@ function Lobby() {
           <div className="mt-6 inline-block gold-panel rounded-xl px-6 py-4 text-left">
             <div className="text-xs uppercase tracking-widest opacity-70">Your Warrior</div>
             <div className="font-display text-2xl font-black">{me.name}</div>
-            <div className="text-sm opacity-80">📞 {me.phone}</div>
           </div>
         </motion.div>
 
@@ -79,7 +78,6 @@ function Lobby() {
                   </div>
                   <div>
                     <div className="font-bold">{p.name}</div>
-                    <div className="text-xs text-muted-foreground">📞 {p.phone}</div>
                   </div>
                 </div>
                 {p.id === me.id && <span className="text-xs font-bold text-gold uppercase tracking-widest">You</span>}
